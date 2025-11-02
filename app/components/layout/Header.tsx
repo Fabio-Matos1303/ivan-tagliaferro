@@ -4,7 +4,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { FiMessageCircle } from "react-icons/fi";
 import { Navigation } from "./Navigation";
-import { Button } from "@/app/components/ui/Button";
 import { getWhatsAppLink, siteConfig } from "@/app/lib/constants";
 
 export function Header() {
@@ -18,7 +17,7 @@ export function Header() {
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2">
             <Image
-              src="/logo-nome.jpg"
+              src="/logo-azul-removebg-preview.png"
               alt={siteConfig.name}
               width={150}
               height={50}
