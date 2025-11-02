@@ -4,7 +4,7 @@ export const siteConfig = {
   url: process.env.NEXT_PUBLIC_SITE_URL || "https://ivantagliaferro.com.br",
   
   // Contato
-  whatsapp: "5511999999999", // TODO: Atualizar com número real
+  whatsapp: "5519982514713", // TODO: Atualizar com número real
   email: "contato@ivantagliaferro.com.br", // TODO: Atualizar com email real
   
   // Navegação
