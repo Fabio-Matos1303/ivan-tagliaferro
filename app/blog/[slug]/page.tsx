@@ -1,50 +1,55 @@
 import { Card } from "@/app/components/ui/Card";
 import { Badge } from "@/app/components/ui/Badge";
 import { Button } from "@/app/components/ui/Button";
+import { PostContent } from "@/app/components/blog/PostContent";
 import { getWhatsAppLink } from "@/app/lib/constants";
+import { getPostBySlug } from "@/app/lib/sanity/queries";
+import { urlFor } from "../../../sanity/lib/image";
 import { FiMessageCircle, FiCalendar, FiArrowLeft } from "react-icons/fi";
 import Image from "next/image";
 import Link from "next/link";
+import { format } from "date-fns";
+import { ptBR } from "date-fns/locale";
+import { notFound } from "next/navigation";
 
-export const metadata = {
-  title: "Blog Post | Ivan Tagliaferro",
-  description: "Leia artigos sobre intercâmbio e educação internacional.",
+const categoryLabels: Record<string, string> = {
+  dicas: "Dicas",
+  documentacao: "Documentação",
+  destinos: "Destinos",
+  experiencias: "Experiências",
+  geral: "Geral",
 };
 
-// TODO: Substituir por busca dinâmica do CMS baseado no slug
 async function getPost(slug: string) {
-  // Por enquanto, retorna dados mockados
-  // Quando o CMS estiver configurado, buscar do Sanity
+  try {
+    const post = await getPostBySlug(slug);
+    if (!post) {
+      return null;
+    }
+    return post;
+  } catch (error) {
+    console.error("Erro ao buscar post:", error);
+    return null;
+  }
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
+  const post = await getPost(slug);
+
+  if (!post) {
+    return {
+      title: "Post não encontrado | Ivan Tagliaferro",
+    };
+  }
+
   return {
-    title: "Como Escolher o Destino Ideal para seu Intercâmbio",
-    excerpt: "Descubra os principais fatores a considerar na hora de escolher o destino perfeito para sua experiência de intercâmbio.",
-    content: `
-      <p>Escolher o destino ideal para seu intercâmbio é uma das decisões mais importantes do processo. Esta escolha vai influenciar não apenas sua experiência acadêmica, mas também seu crescimento pessoal e profissional.</p>
-      
-      <h2>Fatores a Considerar</h2>
-      
-      <h3>1. Objetivos Pessoais</h3>
-      <p>Antes de escolher um destino, é fundamental definir seus objetivos. Você quer aprender ou melhorar um idioma específico? Busca uma experiência cultural particular? Tem objetivos acadêmicos específicos?</p>
-      
-      <h3>2. Orçamento</h3>
-      <p>O custo de vida varia significativamente entre países e cidades. Considere não apenas as taxas de matrícula, mas também custo de moradia, alimentação, transporte e outros gastos do dia a dia.</p>
-      
-      <h3>3. Clima e Cultura</h3>
-      <p>Pense no tipo de clima e cultura com os quais você se identifica. Algumas pessoas preferem climas mais quentes, outras preferem estações bem definidas. Da mesma forma, a adaptação cultural pode ser mais fácil em alguns lugares do que em outros.</p>
-      
-      <h3>4. Oportunidades Acadêmicas</h3>
-      <p>Pesquise as universidades e programas educacionais disponíveis no destino. Alguns países são conhecidos por excelência em áreas específicas, o que pode ser importante dependendo do seu curso de interesse.</p>
-      
-      <h2>Conclusão</h2>
-      <p>Lembre-se de que não existe um destino "perfeito" universalmente. O melhor destino é aquele que se alinha com seus objetivos pessoais, acadêmicos e financeiros. Estamos aqui para ajudá-lo nessa escolha tão importante.</p>
-    `,
-    image: "/placeholder-blog.jpg",
-    date: "2025-01-15",
-    category: "Dicas",
-    author: {
-      name: "Ivan Tagliaferro",
-      image: "/ivan-foto.jpg",
-    },
+    title: `${post.title} | Ivan Tagliaferro`,
+    description: post.excerpt || "Leia artigos sobre intercâmbio e educação internacional.",
   };
 }
 
@@ -56,6 +61,20 @@ export default async function BlogPostPage({
   const { slug } = await params;
   const post = await getPost(slug);
   const whatsappUrl = getWhatsAppLink();
+
+  if (!post) {
+    notFound();
+  }
+
+  const imageUrl = post.mainImage ? urlFor(post.mainImage).width(1200).height(600).url() : null;
+  // categories agora é um array
+  const firstCategory = post.categories && post.categories.length > 0 
+    ? post.categories[0] 
+    : null;
+  const categoryLabel = firstCategory ? categoryLabels[firstCategory.toLowerCase()] || firstCategory : "";
+  const formattedDate = post.publishedAt
+    ? format(new Date(post.publishedAt), "d 'de' MMMM, yyyy", { locale: ptBR })
+    : "";
 
   return (
     <div className="min-h-screen">
@@ -71,26 +90,28 @@ export default async function BlogPostPage({
               Voltar para o Blog
             </Link>
             
-            <div className="flex items-center gap-4 mb-4">
-              <Badge variant="primary" className="bg-white text-[var(--primary)]">
-                {post.category}
-              </Badge>
-              <div className="flex items-center text-blue-100 text-sm">
-                <FiCalendar className="w-4 h-4 mr-1" />
-                {new Date(post.date).toLocaleDateString("pt-BR", {
-                  day: "numeric",
-                  month: "long",
-                  year: "numeric",
-                })}
+            {categoryLabel && (
+              <div className="flex items-center gap-4 mb-4">
+                <Badge variant="primary" className="bg-white text-[var(--primary)]">
+                  {categoryLabel}
+                </Badge>
+                {formattedDate && (
+                  <div className="flex items-center text-blue-100 text-sm">
+                    <FiCalendar className="w-4 h-4 mr-1" />
+                    {formattedDate}
+                  </div>
+                )}
               </div>
-            </div>
+            )}
 
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6">
               {post.title}
             </h1>
-            <p className="text-xl text-blue-100">
-              {post.excerpt}
-            </p>
+            {post.excerpt && (
+              <p className="text-xl text-blue-100">
+                {post.excerpt}
+              </p>
+            )}
           </div>
         </div>
       </section>
@@ -100,46 +121,37 @@ export default async function BlogPostPage({
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto">
             {/* Imagem de Destaque */}
-            <div className="relative w-full h-96 mb-12 rounded-xl overflow-hidden bg-gray-200">
-              <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-[var(--primary)] to-[var(--primary-dark)]">
-                <span className="text-white">Imagem do Post</span>
+            {imageUrl && (
+              <div className="relative w-full h-96 mb-12 rounded-xl overflow-hidden bg-gray-200">
+                <Image
+                  src={imageUrl}
+                  alt={post.mainImage?.alt || post.title}
+                  fill
+                  className="object-cover"
+                  priority
+                />
               </div>
-              {/* Quando houver imagem real:
-              <Image
-                src={post.image}
-                alt={post.title}
-                fill
-                className="object-cover"
-              />
-              */}
-            </div>
+            )}
 
             {/* Conteúdo */}
-            <div
-              className="prose prose-lg max-w-none
-                prose-headings:text-gray-900 prose-headings:font-bold
-                prose-p:text-gray-700 prose-p:leading-relaxed
-                prose-a:text-[var(--primary)] prose-a:no-underline hover:prose-a:underline
-                prose-strong:text-gray-900
-                prose-ul:text-gray-700 prose-ol:text-gray-700
-                prose-li:text-gray-700"
-              dangerouslySetInnerHTML={{ __html: post.content }}
-            />
+            {post.body && <PostContent content={post.body} />}
 
             {/* Author Info */}
-            <Card className="mt-12">
-              <div className="flex items-center space-x-4">
-                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[var(--primary)] to-[var(--primary-dark)] flex items-center justify-center">
-                  <span className="text-white font-semibold">
-                    {post.author.name.charAt(0)}
-                  </span>
+            {post.author && (
+              <Card className="mt-12">
+                <div className="flex items-center space-x-4">
+                  <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[var(--primary)] to-[var(--primary-dark)] flex items-center justify-center">
+                    <span className="text-white font-semibold">
+                      {post.author.charAt(0).toUpperCase()}
+                    </span>
+                  </div>
+                  <div>
+                    <p className="font-semibold text-gray-900">{post.author}</p>
+                    <p className="text-sm text-gray-600">Especialista em Intercâmbio</p>
+                  </div>
                 </div>
-                <div>
-                  <p className="font-semibold text-gray-900">{post.author.name}</p>
-                  <p className="text-sm text-gray-600">Especialista em Intercâmbio</p>
-                </div>
-              </div>
-            </Card>
+              </Card>
+            )}
 
             {/* CTA */}
             <div className="mt-12 text-center">

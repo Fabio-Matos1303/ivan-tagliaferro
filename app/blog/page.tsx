@@ -1,49 +1,39 @@
-import { Card } from "@/app/components/ui/Card";
 import { Button } from "@/app/components/ui/Button";
 import { Badge } from "@/app/components/ui/Badge";
+import { PostCard } from "@/app/components/blog/PostCard";
 import { getWhatsAppLink } from "@/app/lib/constants";
-import { FiMessageCircle, FiCalendar, FiArrowRight } from "react-icons/fi";
-import Image from "next/image";
-import Link from "next/link";
+import { getPosts, getCategories } from "@/app/lib/sanity/queries";
+import { FiMessageCircle } from "react-icons/fi";
 
 export const metadata = {
   title: "Blog | Ivan Tagliaferro",
   description: "Artigos, dicas e informações sobre intercâmbio e educação internacional.",
 };
 
-// Placeholder data - será substituído por dados do CMS
-const blogPosts = [
-  {
-    id: 1,
-    slug: "como-escolher-destino-intercambio",
-    title: "Como Escolher o Destino Ideal para seu Intercâmbio",
-    excerpt: "Descubra os principais fatores a considerar na hora de escolher o destino perfeito para sua experiência de intercâmbio.",
-    image: "/placeholder-blog.jpg",
-    date: "2025-01-15",
-    category: "Dicas",
-  },
-  {
-    id: 2,
-    slug: "documentacao-necessaria-vistos",
-    title: "Documentação Necessária para Vistos de Estudo",
-    excerpt: "Um guia completo sobre os documentos necessários para obter visto de estudante nos principais destinos.",
-    image: "/placeholder-blog.jpg",
-    date: "2025-01-10",
-    category: "Documentação",
-  },
-  {
-    id: 3,
-    slug: "melhores-cidades-estudar-exterior",
-    title: "As Melhores Cidades para Estudar no Exterior",
-    excerpt: "Conheça as cidades mais procuradas por estudantes internacionais e descubra o que cada uma tem a oferecer.",
-    image: "/placeholder-blog.jpg",
-    date: "2025-01-05",
-    category: "Destinos",
-  },
-];
+const categoryLabels: Record<string, string> = {
+  dicas: "Dicas",
+  documentação: "Documentação",
+  documentacao: "Documentação",
+  destinos: "Destinos",
+  experiências: "Experiências",
+  experiencias: "Experiências",
+  geral: "Geral",
+};
 
-export default function BlogPage() {
+export default async function BlogPage() {
   const whatsappUrl = getWhatsAppLink();
+  
+  // Buscar posts do Sanity
+  let posts = [];
+  let categories: string[] = [];
+  
+  try {
+    posts = await getPosts();
+    categories = await getCategories();
+  } catch (error) {
+    console.error("Erro ao buscar posts do Sanity:", error);
+    // Em caso de erro, posts ficará vazio e mostrará mensagem
+  }
 
   return (
     <div className="min-h-screen">
@@ -65,53 +55,29 @@ export default function BlogPage() {
       <section className="py-16 lg:py-24 bg-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-6xl mx-auto">
-            {/* Placeholder: Filtros/Categorias - será implementado futuramente */}
-            <div className="flex flex-wrap gap-2 mb-12">
-              <Badge variant="primary">Todos</Badge>
-              <Badge variant="default">Dicas</Badge>
-              <Badge variant="default">Documentação</Badge>
-              <Badge variant="default">Destinos</Badge>
-            </div>
+            {/* Filtros/Categorias */}
+            {categories.length > 0 && (
+              <div className="flex flex-wrap gap-2 mb-12">
+                <Badge variant="primary">Todos</Badge>
+                {categories.map((category) => {
+                  const categoryKey = category?.toLowerCase() || "";
+                  return (
+                    <Badge key={category} variant="default">
+                      {categoryLabels[categoryKey] || category}
+                    </Badge>
+                  );
+                })}
+              </div>
+            )}
 
             {/* Grid de Posts */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {blogPosts.map((post) => (
-                <Card key={post.id} hover className="flex flex-col">
-                  <div className="relative w-full h-48 mb-4 rounded-lg overflow-hidden bg-gray-200">
-                    {/* Placeholder - será substituído por imagem real do CMS */}
-                    <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-[var(--primary)] to-[var(--primary-dark)]">
-                      <span className="text-white text-sm">Imagem do Post</span>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-center justify-between mb-3">
-                    <Badge variant="default">{post.category}</Badge>
-                    <div className="flex items-center text-sm text-gray-500">
-                      <FiCalendar className="w-4 h-4 mr-1" />
-                      {new Date(post.date).toLocaleDateString("pt-BR")}
-                    </div>
-                  </div>
-                  
-                  <h3 className="text-xl font-semibold text-gray-900 mb-3 line-clamp-2">
-                    {post.title}
-                  </h3>
-                  
-                  <p className="text-gray-600 mb-4 flex-grow line-clamp-3">
-                    {post.excerpt}
-                  </p>
-                  
-                  <Link href={`/blog/${post.slug}`}>
-                    <Button variant="outline" className="w-full">
-                      Ler Mais
-                      <FiArrowRight className="ml-2" />
-                    </Button>
-                  </Link>
-                </Card>
-              ))}
-            </div>
-
-            {/* Placeholder: Paginação - será implementada quando houver mais posts */}
-            {blogPosts.length === 0 && (
+            {posts.length > 0 ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {posts.map((post: any) => (
+                  <PostCard key={post._id} post={post} />
+                ))}
+              </div>
+            ) : (
               <div className="text-center py-12">
                 <p className="text-gray-600 mb-6">
                   Em breve teremos artigos disponíveis!
