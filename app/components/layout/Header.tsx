@@ -21,7 +21,7 @@ export function Header() {
               alt={siteConfig.name}
               width={150}
               height={50}
-              className="h-10 w-auto object-contain"
+              className="h-40 w-auto object-contain"
               priority
             />
           </Link>
