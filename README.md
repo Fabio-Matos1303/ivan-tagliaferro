@@ -1,36 +1,208 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Site Ivan Tagliaferro
 
-## Getting Started
+Site institucional para serviços de consultoria em intercâmbio e educação internacional.
 
-First, run the development server:
+## 🚀 Tecnologias
 
+- **Next.js 16** (App Router)
+- **React 19**
+- **TypeScript 5**
+- **Tailwind CSS v4**
+- **Sanity.io** (CMS)
+- **Resend** (Email)
+
+## 📋 Pré-requisitos
+
+- Node.js 18+ 
+- npm ou yarn
+- Conta no [Sanity.io](https://www.sanity.io) (para CMS)
+- Conta no [Resend](https://resend.com) (para emails)
+
+## 🔧 Instalação
+
+1. Clone o repositório:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone <repository-url>
+cd ivan-tagliaferro
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Instale as dependências:
+```bash
+npm install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. Configure as variáveis de ambiente:
+```bash
+cp .env.example .env.local
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Edite o arquivo `.env.local` com suas credenciais:
+```env
+# Sanity CMS
+NEXT_PUBLIC_SANITY_PROJECT_ID=seu_project_id_aqui
+NEXT_PUBLIC_SANITY_DATASET=production
 
-## Learn More
+# Resend (Email)
+RESEND_API_KEY=re_xxxxxxxxxxxxxxxxxxxxx
+CONTACT_EMAIL=contato@ivantagliaferro.com.br
+RESEND_FROM_EMAIL=onboarding@resend.dev
+```
 
-To learn more about Next.js, take a look at the following resources:
+## 🏃 Executando o Projeto
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Desenvolvimento
+```bash
+npm run dev
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Acesse [http://localhost:3000](http://localhost:3000)
 
-## Deploy on Vercel
+### Sanity Studio
+O Sanity Studio está disponível em [http://localhost:3000/studio](http://localhost:3000/studio)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Build de Produção
+```bash
+npm run build
+npm start
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 📁 Estrutura do Projeto
+
+```
+ivan-tagliaferro/
+├── app/
+│   ├── api/              # API Routes
+│   ├── blog/             # Páginas do blog
+│   ├── components/        # Componentes React
+│   │   ├── blog/         # Componentes do blog
+│   │   ├── layout/       # Header, Footer, Navigation
+│   │   ├── sections/     # Seções da página
+│   │   └── ui/           # Componentes UI base
+│   ├── lib/              # Utilitários e helpers
+│   │   └── sanity/       # Queries e integração Sanity
+│   ├── sobre/            # Página "Quem Sou"
+│   ├── servicos/         # Página "Serviços"
+│   ├── contato/          # Página "Contato"
+│   ├── ebooks/           # Página "E-books"
+│   └── studio/           # Sanity Studio
+├── sanity/               # Configuração do Sanity CMS
+│   ├── lib/              # Cliente e helpers Sanity
+│   └── schemaTypes/      # Schemas do CMS
+├── public/               # Arquivos estáticos
+└── docs/                 # Documentação
+```
+
+## 🎨 Páginas do Site
+
+- `/` - Home (Hero, Serviços, Por Que Escolher)
+- `/sobre` - Quem Sou (Biografia, Credenciais)
+- `/servicos` - Serviços (Grid completo)
+- `/blog` - Blog (Listagem de posts)
+- `/blog/[slug]` - Post individual
+- `/contato` - Contato (Formulário)
+- `/ebooks` - E-books (Grid de materiais)
+- `/studio` - Sanity Studio (CMS)
+
+## 🔌 Integrações
+
+### Sanity CMS
+O conteúdo do blog é gerenciado através do Sanity.io. Para configurar:
+1. Crie uma conta em [sanity.io](https://www.sanity.io)
+2. Crie um projeto
+3. Configure as variáveis de ambiente
+4. Acesse `/studio` para gerenciar conteúdo
+
+**Documentação**: Veja `CONFIGURACAO-SANITY.md` para guia completo.
+
+### Email (Resend)
+O formulário de contato envia emails através do Resend. Para configurar:
+1. Crie uma conta em [resend.com](https://resend.com)
+2. Obtenha sua API key
+3. Configure as variáveis de ambiente
+4. Verifique seu domínio (para produção)
+
+**Documentação**: Veja `CONFIGURACAO-EMAIL.md` para guia completo.
+
+### WhatsApp
+Links do WhatsApp são gerados dinamicamente. Configure o número em `app/lib/constants.ts`.
+
+## 🛠️ Scripts Disponíveis
+
+```bash
+npm run dev      # Inicia servidor de desenvolvimento
+npm run build    # Cria build de produção
+npm run start    # Inicia servidor de produção
+npm run lint     # Executa ESLint
+```
+
+## 📚 Documentação
+
+- `CONFIGURACAO-SANITY.md` - Guia completo do Sanity CMS
+- `CONFIGURACAO-EMAIL.md` - Guia de configuração de email
+- `STATUS-GERAL-PROJETO.md` - Status atual do desenvolvimento
+- `backlog.md` - Backlog do projeto
+
+## 🎯 Status do Projeto
+
+**Progresso: ~80% Concluído**
+
+✅ **Concluído:**
+- Estrutura base e design system
+- Todas as páginas principais
+- Integração com Sanity CMS
+- Formulário de contato funcional
+- Blog completo com CMS
+
+⏳ **Pendente:**
+- SEO básico (sitemap, robots.txt)
+- Sistema de download de e-books
+- Deploy em produção
+
+## 🤝 Desenvolvimento
+
+### Componentes UI
+
+O projeto utiliza componentes reutilizáveis em `app/components/ui/`:
+- `Button` - Botões com variantes
+- `Card` - Cards
+- `Input` - Inputs de formulário
+- `Textarea` - Textareas
+- `Badge` - Badges/Tags
+
+### Design System
+
+Cores e estilos estão definidos em `app/globals.css`:
+- Azul primário: `#1e40af`
+- Cores funcionais: success, warning, error
+- Escala de cinzas completa
+
+## 📝 Notas Importantes
+
+1. **Variáveis de Ambiente**: Nunca commite arquivos `.env.local` no repositório
+2. **Sanity**: O CMS precisa ser configurado antes de criar conteúdo
+3. **Email**: Use domínio verificado no Resend para produção
+4. **Build**: O projeto compila mesmo sem Sanity configurado (com fallbacks)
+
+## 🐛 Troubleshooting
+
+### Erro ao compilar
+- Verifique se todas as dependências estão instaladas: `npm install`
+- Limpe o cache: `rm -rf .next node_modules && npm install`
+
+### Sanity não conecta
+- Verifique as variáveis de ambiente
+- Confirme que o Project ID está correto
+- Veja `CONFIGURACAO-SANITY.md` para mais detalhes
+
+### Email não envia
+- Verifique a API key do Resend
+- Confirme o domínio verificado
+- Veja `CONFIGURACAO-EMAIL.md` para mais detalhes
+
+## 📄 Licença
+
+Projeto privado - Ivan Tagliaferro
+
+---
+
+**Desenvolvido com** ❤️ **usando Next.js e Sanity.io**
