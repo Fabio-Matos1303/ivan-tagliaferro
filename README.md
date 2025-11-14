@@ -94,19 +94,24 @@ ivan-tagliaferro/
 
 ## 🎨 Páginas do Site
 
-- `/` - Home (Hero, Serviços, Por Que Escolher)
+- `/` - Home (Carrossel Hero, Serviços, Por Que Escolher)
 - `/sobre` - Quem Sou (Biografia, Credenciais)
 - `/servicos` - Serviços (Grid completo)
 - `/blog` - Blog (Listagem de posts)
 - `/blog/[slug]` - Post individual
 - `/contato` - Contato (Formulário)
-- `/ebooks` - E-books (Grid de materiais)
+- `/ebooks` - E-books (Grid de materiais via CMS)
 - `/studio` - Sanity Studio (CMS)
 
 ## 🔌 Integrações
 
 ### Sanity CMS
-O conteúdo do blog é gerenciado através do Sanity.io. Para configurar:
+O conteúdo do site é gerenciado através do Sanity.io. O CMS permite gerenciar:
+- **Blog**: Posts, categorias e autores
+- **E-books**: Títulos, descrições, capas e links do Google Drive
+- **Hero Slides**: Slides do carrossel da página inicial
+
+Para configurar:
 1. Crie uma conta em [sanity.io](https://www.sanity.io)
 2. Crie um projeto
 3. Configure as variáveis de ambiente
@@ -149,10 +154,12 @@ npm run lint     # Executa ESLint
 - Integração com Sanity CMS
 - Formulário de contato funcional
 - Blog completo com CMS
+- E-books gerenciados via CMS
+- Carrossel performático na hero section
+- Sistema de download de e-books (redireciona para Google Drive)
 
 ⏳ **Pendente:**
 - SEO básico (sitemap, robots.txt)
-- Sistema de download de e-books
 - Deploy em produção
 
 ## 🤝 Desenvolvimento

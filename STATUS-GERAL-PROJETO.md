@@ -1,7 +1,7 @@
 # 📊 Status Geral do Projeto - Ivan Tagliaferro
 
 **Data**: Janeiro 2025  
-**Status Geral**: 🟢 **~80% Concluído**  
+**Status Geral**: 🟢 **~85% Concluído**  
 **Última Atualização**: Janeiro 2025
 
 ---
@@ -13,8 +13,8 @@
 | **Fundação & Estrutura** | ✅ | 100% | Estrutura completa, design system, componentes base |
 | **Páginas Principais** | ✅ | 100% | Todas as 7 páginas implementadas |
 | **Componentes UI** | ✅ | 100% | 5 componentes base + componentes de layout |
-| **Blog & CMS** | ✅ | 95% | Sanity configurado, integração completa |
-| **Funcionalidades** | 🟡 | 70% | Email funcionando, pendente: downloads, SEO |
+| **Blog & CMS** | ✅ | 100% | Sanity configurado, integração completa (blog, e-books, hero) |
+| **Funcionalidades** | 🟡 | 85% | Email funcionando, e-books via CMS, carrossel hero, pendente: SEO |
 | **Otimização** | ⏸️ | 30% | Performance básica, pendente: SEO avançado |
 | **Deploy** | ⏸️ | 0% | Pendente configuração GoDaddy |
 
@@ -49,21 +49,22 @@
 - ✅ `PostCard` - Card de post do blog
 - ✅ `PostContent` - Renderizador de conteúdo (Portable Text)
 
-**Componentes de Seções (2):**
+**Componentes de Seções (3):**
 - ✅ `ContactForm` - Formulário completo com validação
-- ✅ `EbooksList` - Lista de e-books
+- ✅ `EbooksList` - Lista de e-books (integração CMS)
+- ✅ `HeroCarousel` - Carrossel performático para hero section
 
-**Total**: 12 componentes implementados
+**Total**: 13 componentes implementados
 
 ### 3. **Páginas Implementadas** ✅ 100%
 
 #### ✅ Home (`/`) - 100%
-- Hero Section com CTAs
+- Hero Section com carrossel performático (integração CMS)
+- Auto-play, navegação e swipe touch
 - Seção de Serviços (preview)
 - Seção "Por Que Escolher"
 - CTA Final com WhatsApp
 - ⏳ Depoimentos (estrutura pronta, aguardando dados do CMS)
-- ⏳ E-books preview (estrutura pronta)
 
 #### ✅ Quem Sou (`/sobre`) - 100%
 - Hero Section
@@ -102,21 +103,24 @@
 - Informações de contato
 - CTAs para WhatsApp e email
 
-#### ✅ E-books (`/ebooks`) - 90%
+#### ✅ E-books (`/ebooks`) - 100%
 - Hero Section
-- Grid de e-books
+- Grid de e-books integrado com Sanity CMS
+- Sistema de download via Google Drive
+- Imagens otimizadas do CMS
 - CTAs funcionando
-- ⏳ Sistema de download real (pendente)
 
 **Total**: 7 páginas + 1 Studio = 8 rotas
 
 ### 4. **Integrações** ✅ 95%
 
-#### ✅ Sanity CMS - 95%
+#### ✅ Sanity CMS - 100%
 - ✅ Studio configurado em `/studio`
-- ✅ Schemas completos (post, author, category)
+- ✅ Schemas completos (post, author, category, ebook, heroSlide)
 - ✅ Queries GROQ funcionando
 - ✅ Integração com páginas do blog
+- ✅ Integração com e-books
+- ✅ Integração com carrossel hero
 - ✅ Renderização de conteúdo (Portable Text)
 - ⏳ População de conteúdo inicial (pendente do usuário)
 
@@ -166,9 +170,9 @@
    - [ ] Criar posts de exemplo
    - [ ] Popular serviços via CMS (futuro)
 
-3. **Downloads de E-books** ⏳
-   - [ ] Sistema de download real
-   - [ ] Gerenciamento via CMS (futuro)
+3. **Downloads de E-books** ✅
+   - [x] Sistema de download via Google Drive
+   - [x] Gerenciamento via CMS
 
 ### Prioridade Média
 
@@ -198,11 +202,11 @@
 
 ### Arquivos Criados
 - **Páginas**: 8 (incluindo Studio)
-- **Componentes**: 12
+- **Componentes**: 13
 - **API Routes**: 1 (`/api/contact`)
-- **Schemas Sanity**: 4 (post, author, category, blockContent)
-- **Queries**: 5 funções helper
-- **Arquivos TypeScript/TSX**: ~26 arquivos principais
+- **Schemas Sanity**: 6 (post, author, category, blockContent, ebook, heroSlide)
+- **Queries**: 7 funções helper
+- **Arquivos TypeScript/TSX**: ~28 arquivos principais
 
 ### Linhas de Código (Estimado)
 - TypeScript/TSX: ~3.500 linhas
@@ -268,11 +272,14 @@
 - [x] Sanity CMS configurado
 - [x] Queries GROQ funcionando
 - [x] Renderização de conteúdo
+- [x] E-books via CMS
+- [x] Sistema de download de e-books (Google Drive)
+- [x] Carrossel hero section
+- [x] Integração hero slides com CMS
 
 ### Pendente
 - [ ] SEO básico (sitemap, robots.txt)
 - [ ] Meta tags dinâmicas completas
-- [ ] Sistema de download de e-books
 - [ ] Newsletter funcional
 - [ ] População de conteúdo no CMS
 - [ ] Otimizações de performance
@@ -311,12 +318,12 @@
 ```
 Fundação:        ████████████████████ 100%
 Páginas:         ████████████████████ 100%
-CMS:             ███████████████████░  95%
-Funcionalidades: ███████████████░░░░░  70%
+CMS:             ████████████████████ 100%
+Funcionalidades: ██████████████████░░  85%
 Otimização:      ██████░░░░░░░░░░░░░░  30%
 Deploy:          ░░░░░░░░░░░░░░░░░░░░   0%
 
-PROGRESSO GERAL: ████████████████░░░░  80%
+PROGRESSO GERAL: ██████████████████░░░  85%
 ```
 
 ---
@@ -334,5 +341,12 @@ PROGRESSO GERAL: ████████████████░░░░  8
 ---
 
 **Última Atualização**: Janeiro 2025  
-**Status**: 🟢 **Projeto em excelente estado, ~80% concluído**
+**Status**: 🟢 **Projeto em excelente estado, ~85% concluído**
+
+### 🆕 Novidades Recentes
+
+- ✅ **E-books via CMS**: Sistema completo de gerenciamento de e-books através do Sanity
+- ✅ **Carrossel Hero**: Carrossel performático na hero section com integração CMS
+- ✅ **Download Google Drive**: Sistema de download de e-books redirecionando para Google Drive
+- ✅ **Altura Padronizada**: Slides do carrossel com altura uniforme e responsiva
 
