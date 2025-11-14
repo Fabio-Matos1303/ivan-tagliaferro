@@ -166,12 +166,19 @@ npm run lint     # Executa ESLint
 
 ### Componentes UI
 
-O projeto utiliza componentes reutilizáveis em `app/components/ui/`:
+O projeto utiliza componentes reutilizáveis:
+
+**Componentes UI Base** (`app/components/ui/`):
 - `Button` - Botões com variantes
 - `Card` - Cards
 - `Input` - Inputs de formulário
 - `Textarea` - Textareas
 - `Badge` - Badges/Tags
+
+**Componentes de Seções** (`app/components/sections/`):
+- `ContactForm` - Formulário de contato
+- `EbooksList` - Lista de e-books (integração CMS)
+- `HeroCarousel` - Carrossel performático para hero section
 
 ### Design System
 
