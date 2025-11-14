@@ -2,6 +2,7 @@ import { EbooksList } from "@/app/components/sections/EbooksList";
 import { Card } from "@/app/components/ui/Card";
 import { Button } from "@/app/components/ui/Button";
 import { getWhatsAppLink } from "@/app/lib/constants";
+import { getEbooks } from "@/app/lib/sanity/queries";
 import { FiMessageCircle, FiBookOpen } from "react-icons/fi";
 
 export const metadata = {
@@ -9,8 +10,17 @@ export const metadata = {
   description: "Baixe nossos e-books gratuitos e aprenda tudo sobre intercâmbio e educação internacional.",
 };
 
-export default function EbooksPage() {
+export default async function EbooksPage() {
   const whatsappUrl = getWhatsAppLink();
+  
+  // Buscar e-books do Sanity
+  let ebooks = [];
+  try {
+    ebooks = await getEbooks();
+  } catch (error) {
+    console.error("Erro ao buscar e-books do Sanity:", error);
+    // Em caso de erro, ebooks ficará vazio e mostrará mensagem
+  }
 
   return (
     <div className="min-h-screen">
@@ -34,7 +44,7 @@ export default function EbooksPage() {
       </section>
 
       {/* Lista de E-books */}
-      <EbooksList />
+      <EbooksList ebooks={ebooks} />
 
       {/* CTA */}
       <section className="py-16 lg:py-24 bg-gray-50">

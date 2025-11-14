@@ -113,3 +113,73 @@ export async function getCategories() {
   }
 }
 
+// Query para listar todos os e-books
+export const ebooksQuery = groq`
+  *[_type == "ebook"] | order(publishedAt desc) {
+    _id,
+    title,
+    slug,
+    description,
+    cover,
+    googleDriveUrl,
+    publishedAt,
+    featured
+  }
+`;
+
+// Query para e-books destacados
+export const featuredEbooksQuery = groq`
+  *[_type == "ebook" && featured == true] | order(publishedAt desc) [0...3] {
+    _id,
+    title,
+    slug,
+    description,
+    cover,
+    googleDriveUrl,
+    publishedAt
+  }
+`;
+
+// Funções helper para buscar e-books
+export async function getEbooks() {
+  try {
+    return await client.fetch(ebooksQuery);
+  } catch (error) {
+    console.error("Erro ao buscar e-books:", error);
+    return [];
+  }
+}
+
+export async function getFeaturedEbooks() {
+  try {
+    return await client.fetch(featuredEbooksQuery);
+  } catch (error) {
+    console.error("Erro ao buscar e-books destacados:", error);
+    return [];
+  }
+}
+
+// Query para slides do hero
+export const heroSlidesQuery = groq`
+  *[_type == "heroSlide" && active == true] | order(order asc, _createdAt desc) {
+    _id,
+    title,
+    description,
+    image,
+    ctaPrimary,
+    ctaSecondary,
+    order,
+    active
+  }
+`;
+
+// Função helper para buscar slides do hero
+export async function getHeroSlides() {
+  try {
+    return await client.fetch(heroSlidesQuery);
+  } catch (error) {
+    console.error("Erro ao buscar slides do hero:", error);
+    return [];
+  }
+}
+
