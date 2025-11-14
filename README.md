@@ -112,7 +112,7 @@ O conteúdo do blog é gerenciado através do Sanity.io. Para configurar:
 3. Configure as variáveis de ambiente
 4. Acesse `/studio` para gerenciar conteúdo
 
-**Documentação**: Veja `CONFIGURACAO-SANITY.md` para guia completo.
+**Documentação**: Configure as variáveis de ambiente e acesse `/studio` para gerenciar conteúdo.
 
 ### Email (Resend)
 O formulário de contato envia emails através do Resend. Para configurar:
@@ -121,7 +121,7 @@ O formulário de contato envia emails através do Resend. Para configurar:
 3. Configure as variáveis de ambiente
 4. Verifique seu domínio (para produção)
 
-**Documentação**: Veja `CONFIGURACAO-EMAIL.md` para guia completo.
+**Documentação**: Configure a API key do Resend nas variáveis de ambiente e verifique seu domínio para produção.
 
 ### WhatsApp
 Links do WhatsApp são gerados dinamicamente. Configure o número em `app/lib/constants.ts`.
@@ -137,10 +137,7 @@ npm run lint     # Executa ESLint
 
 ## 📚 Documentação
 
-- `CONFIGURACAO-SANITY.md` - Guia completo do Sanity CMS
-- `CONFIGURACAO-EMAIL.md` - Guia de configuração de email
-- `STATUS-GERAL-PROJETO.md` - Status atual do desenvolvimento
-- `backlog.md` - Backlog do projeto
+- `STATUS-GERAL-PROJETO.md` - Status atual do desenvolvimento e andamento do projeto
 
 ## 🎯 Status do Projeto
 
@@ -190,14 +187,14 @@ Cores e estilos estão definidos em `app/globals.css`:
 - Limpe o cache: `rm -rf .next node_modules && npm install`
 
 ### Sanity não conecta
-- Verifique as variáveis de ambiente
+- Verifique as variáveis de ambiente (`NEXT_PUBLIC_SANITY_PROJECT_ID` e `NEXT_PUBLIC_SANITY_DATASET`)
 - Confirme que o Project ID está correto
-- Veja `CONFIGURACAO-SANITY.md` para mais detalhes
+- Certifique-se de que o projeto Sanity existe e está acessível
 
 ### Email não envia
-- Verifique a API key do Resend
-- Confirme o domínio verificado
-- Veja `CONFIGURACAO-EMAIL.md` para mais detalhes
+- Verifique a API key do Resend (`RESEND_API_KEY`)
+- Confirme o domínio verificado no painel do Resend
+- Verifique se `CONTACT_EMAIL` e `RESEND_FROM_EMAIL` estão configurados corretamente
 
 ## 📄 Licença
 

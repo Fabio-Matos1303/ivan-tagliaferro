@@ -1,7 +1,8 @@
 # 📊 Status Geral do Projeto - Ivan Tagliaferro
 
 **Data**: Janeiro 2025  
-**Status Geral**: 🟢 **~80% Concluído**
+**Status Geral**: 🟢 **~80% Concluído**  
+**Última Atualização**: Janeiro 2025
 
 ---
 
@@ -201,15 +202,18 @@
 - **API Routes**: 1 (`/api/contact`)
 - **Schemas Sanity**: 4 (post, author, category, blockContent)
 - **Queries**: 5 funções helper
+- **Arquivos TypeScript/TSX**: ~26 arquivos principais
 
 ### Linhas de Código (Estimado)
 - TypeScript/TSX: ~3.500 linhas
 - CSS: ~150 linhas
 - Configurações: ~500 linhas
+- **Total**: ~4.150 linhas
 
 ### Dependências
-- **Produção**: 14 pacotes
+- **Produção**: 14 pacotes principais
 - **Desenvolvimento**: 6 pacotes
+- **Total**: 20 pacotes instalados
 
 ---
 
