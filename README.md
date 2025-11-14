@@ -146,7 +146,7 @@ npm run lint     # Executa ESLint
 
 ## 🎯 Status do Projeto
 
-**Progresso: ~80% Concluído**
+**Progresso: ~85% Concluído**
 
 ✅ **Concluído:**
 - Estrutura base e design system
