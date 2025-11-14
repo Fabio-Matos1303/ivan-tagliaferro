@@ -1,39 +1,100 @@
 import { Button } from "@/app/components/ui/Button";
-import { getWhatsAppLink, siteConfig } from "@/app/lib/constants";
-import { FiMessageCircle, FiDownload } from "react-icons/fi";
+import { getWhatsAppLink } from "@/app/lib/constants";
+import { FiMessageCircle } from "react-icons/fi";
+import { HeroCarousel, HeroSlide } from "@/app/components/sections/HeroCarousel";
+import { getHeroSlides } from "@/app/lib/sanity/queries";
+import { urlFor } from "@/sanity/lib/image";
 
-export default function Home() {
+export default async function Home() {
   const whatsappMessage = "Olá! Gostaria de saber mais sobre os serviços de intercâmbio.";
   const whatsappUrl = getWhatsAppLink(whatsappMessage);
 
+  // Buscar slides do Sanity CMS
+  let sanitySlides: any[] = [];
+  try {
+    sanitySlides = await getHeroSlides();
+  } catch (error) {
+    console.error("Erro ao buscar slides do Sanity:", error);
+  }
+
+  // Converter slides do Sanity para o formato do componente
+  const heroSlides: HeroSlide[] = sanitySlides.length > 0
+    ? sanitySlides.map((slide: any) => ({
+        id: slide._id,
+        title: slide.title,
+        description: slide.description,
+        image: slide.image ? urlFor(slide.image).width(1920).height(1080).url() : undefined,
+        imageAlt: slide.image?.alt || slide.title,
+        ctaPrimary: slide.ctaPrimary ? {
+          text: slide.ctaPrimary.text,
+          href: slide.ctaPrimary.href,
+          external: slide.ctaPrimary.external || false,
+        } : undefined,
+        ctaSecondary: slide.ctaSecondary ? {
+          text: slide.ctaSecondary.text,
+          href: slide.ctaSecondary.href,
+          external: slide.ctaSecondary.external || false,
+        } : undefined,
+      }))
+    : [
+        // Fallback: slides estáticos caso não haja slides no CMS
+        {
+          id: "1",
+          title: "Realize seu sonho de estudar no exterior",
+          description: "Consultoria especializada em intercâmbio e educação internacional. Acompanhamento personalizado em cada etapa da sua jornada.",
+          ctaPrimary: {
+            text: "Falar no WhatsApp",
+            href: whatsappUrl,
+            external: true,
+          },
+          ctaSecondary: {
+            text: "Baixar E-book Grátis",
+            href: "/ebooks",
+            external: false,
+          },
+        },
+        {
+          id: "2",
+          title: "Experiência que transforma vidas",
+          description: "Mais de 48.896 experiências de ensino no exterior. Ajudamos você a encontrar o destino perfeito para seus objetivos acadêmicos e profissionais.",
+          ctaPrimary: {
+            text: "Conheça Nossos Serviços",
+            href: "/servicos",
+            external: false,
+          },
+          ctaSecondary: {
+            text: "Falar no WhatsApp",
+            href: whatsappUrl,
+            external: true,
+          },
+        },
+        {
+          id: "3",
+          title: "Acompanhamento 24/7 em toda sua jornada",
+          description: "Suporte completo desde o planejamento até o retorno. Documentação, visto, acomodação e muito mais. Estamos com você em cada passo.",
+          ctaPrimary: {
+            text: "Falar no WhatsApp",
+            href: whatsappUrl,
+            external: true,
+          },
+          ctaSecondary: {
+            text: "Conheça Nossa História",
+            href: "/sobre",
+            external: false,
+          },
+        },
+      ];
+
   return (
     <div className="min-h-screen">
-      {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-[var(--primary)] to-[var(--primary-dark)] text-white py-20 lg:py-32">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl mx-auto text-center">
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
-              Realize seu sonho de estudar no exterior
-            </h1>
-            <p className="text-xl sm:text-2xl text-blue-100 mb-8 leading-relaxed">
-              Consultoria especializada em intercâmbio e educação internacional. 
-              Acompanhamento personalizado em cada etapa da sua jornada.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">
-                <Button size="lg" variant="secondary" className="w-full sm:w-auto">
-                  <FiMessageCircle className="mr-2" />
-                  Falar no WhatsApp
-                </Button>
-              </a>
-              <Button size="lg" variant="outline" className="w-full sm:w-auto border-white text-white hover:bg-white hover:text-[var(--primary)]">
-                <FiDownload className="mr-2" />
-                Baixar E-book Grátis
-              </Button>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* Hero Section com Carrossel */}
+      <HeroCarousel
+        slides={heroSlides}
+        autoPlay={true}
+        autoPlayInterval={6000}
+        showIndicators={true}
+        showArrows={true}
+      />
 
       {/* Serviços Preview */}
       <section className="py-16 lg:py-24 bg-gray-50">
