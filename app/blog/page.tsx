@@ -73,9 +73,11 @@ export default async function BlogPage() {
             {/* Grid de Posts */}
             {posts.length > 0 ? (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {posts.map((post: any) => (
-                  <PostCard key={post._id} post={post} />
-                ))}
+                {posts
+                  .filter((post: any) => post.slug?.current) // Filtrar posts sem slug
+                  .map((post: any) => (
+                    <PostCard key={post._id} post={post} />
+                  ))}
               </div>
             ) : (
               <div className="text-center py-12">

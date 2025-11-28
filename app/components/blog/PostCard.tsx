@@ -12,7 +12,7 @@ interface PostCardProps {
   post: {
     _id: string;
     title: string;
-    slug: { current: string };
+    slug?: { current: string } | null;
     excerpt?: string;
     mainImage?: any;
     publishedAt: string;
@@ -83,12 +83,18 @@ export function PostCard({ post }: PostCardProps) {
         </p>
       )}
       
-      <Link href={`/blog/${post.slug.current}`}>
-        <Button variant="outline" className="w-full">
-          Ler Mais
-          <FiArrowRight className="ml-2" />
+      {post.slug?.current ? (
+        <Link href={`/blog/${post.slug.current}`}>
+          <Button variant="outline" className="w-full">
+            Ler Mais
+            <FiArrowRight className="ml-2" />
+          </Button>
+        </Link>
+      ) : (
+        <Button variant="outline" className="w-full" disabled>
+          Sem link disponível
         </Button>
-      </Link>
+      )}
     </Card>
   );
 }
