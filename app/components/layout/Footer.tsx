@@ -71,6 +71,42 @@ export function Footer() {
           </div>
         </div>
 
+        {/* Reconhecimentos e Certificações */}
+        <div className="border-t border-gray-800 mt-8 pt-8">
+          <h3 className="text-white font-semibold mb-6 text-center">
+            Reconhecimentos e Certificações
+          </h3>
+          <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12">
+            <div className="flex items-center justify-center h-20 w-auto opacity-80 hover:opacity-100 transition-opacity">
+              <Image
+                src="/CPIEA-LOGO.png"
+                alt="CPIEA - Certificação"
+                width={150}
+                height={80}
+                className="h-full w-auto object-contain"
+              />
+            </div>
+            <div className="flex items-center justify-center h-20 w-auto opacity-80 hover:opacity-100 transition-opacity">
+              <Image
+                src="/Abrapei-branco-300x208.png"
+                alt="ABRAPEI - Associação Brasileira de Agências de Programas de Educação Internacional"
+                width={200}
+                height={80}
+                className="h-full w-auto object-contain"
+              />
+            </div>
+            <div className="flex items-center justify-center h-20 w-auto opacity-80 hover:opacity-100 transition-opacity">
+              <Image
+                src="/elets_newlogo2003.png"
+                alt="ELETS - Certificação"
+                width={150}
+                height={80}
+                className="h-full w-auto object-contain filter brightness-0 invert"
+              />
+            </div>
+          </div>
+        </div>
+
         {/* Copyright */}
         <div className="border-t border-gray-800 mt-8 pt-8 text-center text-sm text-gray-400">
           <p>
