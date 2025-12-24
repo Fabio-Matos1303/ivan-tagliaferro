@@ -18,6 +18,14 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Ivan Tagliaferro - Consultoria em Intercâmbio",
   description: "Consultoria especializada em intercâmbio e educação internacional. Ajudamos você a realizar o sonho de estudar no exterior.",
+  icons: {
+    icon: [
+      { url: "/icon.png", type: "image/png" },
+    ],
+    apple: [
+      { url: "/apple-icon.png", type: "image/png" },
+    ],
+  },
 };
 
 export default function RootLayout({
