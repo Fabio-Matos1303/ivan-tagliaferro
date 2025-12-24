@@ -4,8 +4,8 @@ export const siteConfig = {
   url: process.env.NEXT_PUBLIC_SITE_URL || "https://ivantagliaferro.com.br",
   
   // Contato
-  whatsapp: "5519982514713", // TODO: Atualizar com número real
-  email: "contato@ivantagliaferro.com.br", // TODO: Atualizar com email real
+  whatsapp: "5519981236025", // Alana - Assistente IA
+  email: "contato@ivantagliaferro.com.br",
   
   // Navegação
   navLinks: [
@@ -16,10 +16,10 @@ export const siteConfig = {
     { label: "Contato", href: "/contato" },
   ],
   
-  // Redes Sociais (opcional)
+  // Redes Sociais
   social: {
-    instagram: "",
-    linkedin: "",
+    instagram: "https://www.instagram.com/ivantagliaferro/",
+    linkedin: "https://www.linkedin.com/in/ivan-tagliaferro-48391817/",
     facebook: "",
   },
 };
