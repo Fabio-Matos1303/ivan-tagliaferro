@@ -77,7 +77,12 @@ export function Footer() {
             Reconhecimentos e Certificações
           </h3>
           <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12">
-            <div className="flex items-center justify-center h-20 w-auto opacity-80 hover:opacity-100 transition-opacity">
+            <a
+              href="https://cpiea.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center h-20 w-auto opacity-80 hover:opacity-100 transition-opacity"
+            >
               <Image
                 src="/CPIEA-LOGO.png"
                 alt="CPIEA - Certificação"
@@ -85,8 +90,13 @@ export function Footer() {
                 height={80}
                 className="h-full w-auto object-contain"
               />
-            </div>
-            <div className="flex items-center justify-center h-20 w-auto opacity-80 hover:opacity-100 transition-opacity">
+            </a>
+            <a
+              href="https://abrapei.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center h-20 w-auto opacity-80 hover:opacity-100 transition-opacity"
+            >
               <Image
                 src="/Abrapei-branco-300x208.png"
                 alt="ABRAPEI - Associação Brasileira de Agências de Programas de Educação Internacional"
@@ -94,16 +104,21 @@ export function Footer() {
                 height={80}
                 className="h-full w-auto object-contain"
               />
-            </div>
-            <div className="flex items-center justify-center h-20 w-auto opacity-80 hover:opacity-100 transition-opacity">
+            </a>
+            <a
+              href="https://educationsummit.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center h-20 w-auto opacity-80 hover:opacity-100 transition-opacity"
+            >
               <Image
-                src="/elets_newlogo2003.png"
-                alt="ELETS - Certificação"
+                src="/award-logo.png"
+                alt="35th ELETS World Education Summit Awards 2026"
                 width={150}
                 height={80}
-                className="h-full w-auto object-contain filter brightness-0 invert"
+                className="h-full w-auto object-contain"
               />
-            </div>
+            </a>
           </div>
         </div>
 
