@@ -13,7 +13,7 @@ export const postsQuery = groq`
     excerpt,
     mainImage,
     publishedAt,
-    "categories": categories[]->title,
+    "categories": coalesce(categories[]->title, [category], []),
     featured,
     "author": author->name
   }
@@ -28,7 +28,7 @@ export const postBySlugQuery = groq`
     excerpt,
     mainImage,
     publishedAt,
-    "categories": categories[]->title,
+    "categories": coalesce(categories[]->title, [category], []),
     body,
     "author": author->name,
     "authorImage": author->image
@@ -63,7 +63,10 @@ export const postsByCategoryQuery = groq`
 
 // Query para categorias únicas
 export const categoriesQuery = groq`
-  array::unique(*[_type == "post"].categories[]->title)
+  array::unique(
+    *[_type == "post"] | 
+    coalesce(categories[]->title, [category], [])[]
+  )
 `;
 
 // Funções helper para buscar dados

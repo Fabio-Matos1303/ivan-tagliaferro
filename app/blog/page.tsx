@@ -30,6 +30,16 @@ export default async function BlogPage() {
   try {
     posts = await getPosts();
     categories = await getCategories();
+    
+    // Debug: Log para verificar posts retornados
+    console.log("Posts retornados:", posts.length);
+    console.log("Posts com detalhes:", posts.map((p: any) => ({
+      title: p.title,
+      hasSlug: !!p.slug?.current,
+      slug: p.slug?.current,
+      hasPublishedAt: !!p.publishedAt,
+      publishedAt: p.publishedAt
+    })));
   } catch (error) {
     console.error("Erro ao buscar posts do Sanity:", error);
     // Em caso de erro, posts ficará vazio e mostrará mensagem
@@ -72,13 +82,23 @@ export default async function BlogPage() {
 
             {/* Grid de Posts */}
             {posts.length > 0 ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {posts
-                  .filter((post: any) => post.slug?.current) // Filtrar posts sem slug
-                  .map((post: any) => (
-                    <PostCard key={post._id} post={post} />
-                  ))}
-              </div>
+              <>
+                {posts.filter((post: any) => post.slug?.current).length === 0 && (
+                  <div className="mb-6 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
+                    <p className="text-yellow-800 text-sm">
+                      ⚠️ Encontrados {posts.length} post(s), mas nenhum tem slug gerado. 
+                      Por favor, gere o slug no Sanity Studio para cada post.
+                    </p>
+                  </div>
+                )}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                  {posts
+                    .filter((post: any) => post.slug?.current) // Filtrar posts sem slug
+                    .map((post: any) => (
+                      <PostCard key={post._id} post={post} />
+                    ))}
+                </div>
+              </>
             ) : (
               <div className="text-center py-12">
                 <p className="text-gray-600 mb-6">
