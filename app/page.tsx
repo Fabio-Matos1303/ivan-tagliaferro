@@ -5,6 +5,9 @@ import { HeroCarousel, HeroSlide } from "@/app/components/sections/HeroCarousel"
 import { getHeroSlides } from "@/app/lib/sanity/queries";
 import { urlFor } from "@/sanity/lib/image";
 
+// Revalidar a página a cada 60 segundos para buscar novos slides
+export const revalidate = 60;
+
 export default async function Home() {
   const whatsappMessage = "Olá! Gostaria de saber mais sobre os serviços de intercâmbio.";
   const whatsappUrl = getWhatsAppLink(whatsappMessage);
