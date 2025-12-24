@@ -2,6 +2,7 @@ import { Button } from "@/app/components/ui/Button";
 import { getWhatsAppLink } from "@/app/lib/constants";
 import { FiMessageCircle } from "react-icons/fi";
 import { HeroCarousel, HeroSlide } from "@/app/components/sections/HeroCarousel";
+import { AlanaAssistant } from "@/app/components/sections/AlanaAssistant";
 import { getHeroSlides } from "@/app/lib/sanity/queries";
 import { urlFor } from "@/sanity/lib/image";
 
@@ -178,6 +179,9 @@ export default async function Home() {
           </div>
         </div>
       </section>
+
+      {/* Alana Assistant */}
+      <AlanaAssistant />
 
       {/* CTA Final */}
       <section className="py-16 lg:py-24 bg-[var(--primary)] text-white">
