@@ -1,6 +1,7 @@
 import { Button } from "@/app/components/ui/Button";
+import { Card } from "@/app/components/ui/Card";
 import { getWhatsAppLink } from "@/app/lib/constants";
-import { FiMessageCircle } from "react-icons/fi";
+import { FiMessageCircle, FiCheck, FiBookOpen, FiUsers, FiShare2, FiFileText, FiMapPin, FiHeart } from "react-icons/fi";
 import { HeroCarousel, HeroSlide } from "@/app/components/sections/HeroCarousel";
 import { AlanaAssistant } from "@/app/components/sections/AlanaAssistant";
 import { getHeroSlides } from "@/app/lib/sanity/queries";
@@ -27,7 +28,7 @@ export default async function Home() {
         id: slide._id,
         title: slide.title,
         description: slide.description,
-        image: slide.image ? urlFor(slide.image).width(1920).height(1080).url() : undefined,
+        image: slide.image ? urlFor(slide.image).width(1920).fit('max').url() : undefined,
         imageAlt: slide.image?.alt || slide.title,
         ctaPrimary: slide.ctaPrimary ? {
           text: slide.ctaPrimary.text,
@@ -111,33 +112,174 @@ export default async function Home() {
               Oferecemos soluções completas para sua jornada de intercâmbio
             </p>
           </div>
-          {/* Cards de serviços serão adicionados quando o CMS estiver configurado */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {/* Placeholder - será substituído por dados do CMS */}
-            <div className="bg-white rounded-xl p-6 shadow-sm">
-              <h3 className="text-xl font-semibold mb-3 text-gray-900">
-                Orientação Personalizada
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-start">
+            {/* Networking Global */}
+            <Card hover className="flex flex-col h-full">
+              <div className="flex items-center justify-center w-16 h-16 rounded-full bg-[var(--primary)]/10 text-[var(--primary)] mb-4">
+                <FiShare2 className="w-8 h-8" />
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-3">
+                Networking Global para Instituições de Ensino
               </h3>
-              <p className="text-gray-600">
-                Acompanhamento individualizado em cada etapa do processo.
+              <p className="text-gray-600 mb-4 flex-grow">
+                Expansão de presença internacional e parcerias estratégicas para escolas e faculdades.
               </p>
-            </div>
-            <div className="bg-white rounded-xl p-6 shadow-sm">
-              <h3 className="text-xl font-semibold mb-3 text-gray-900">
-                Seleção de Destinos
+              <ul className="space-y-2 mb-4">
+                <li className="flex items-start text-sm text-gray-600">
+                  <FiCheck className="w-4 h-4 text-[var(--primary)] mr-2 flex-shrink-0 mt-0.5" />
+                  <span>Parcerias estratégicas internacionais</span>
+                </li>
+                <li className="flex items-start text-sm text-gray-600">
+                  <FiCheck className="w-4 h-4 text-[var(--primary)] mr-2 flex-shrink-0 mt-0.5" />
+                  <span>Gestão de redes de representantes</span>
+                </li>
+              </ul>
+              <a href="/servicos" className="mt-auto">
+                <Button variant="outline" className="w-full">
+                  Saiba Mais
+                </Button>
+              </a>
+            </Card>
+
+            {/* Vistos Americanos */}
+            <Card hover className="flex flex-col h-full">
+              <div className="flex items-center justify-center w-16 h-16 rounded-full bg-[var(--primary)]/10 text-[var(--primary)] mb-4">
+                <FiFileText className="w-8 h-8" />
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-3">
+                Assessoria para Vistos Americanos
               </h3>
-              <p className="text-gray-600">
-                Encontre o destino perfeito para seus objetivos.
+              <p className="text-gray-600 mb-4 flex-grow">
+                Preparação completa de dossiês e documentação para maximizar taxas de aprovação.
               </p>
-            </div>
-            <div className="bg-white rounded-xl p-6 shadow-sm">
-              <h3 className="text-xl font-semibold mb-3 text-gray-900">
-                Documentação
+              <ul className="space-y-2 mb-4">
+                <li className="flex items-start text-sm text-gray-600">
+                  <FiCheck className="w-4 h-4 text-[var(--primary)] mr-2 flex-shrink-0 mt-0.5" />
+                  <span>Maximização de taxas de aprovação</span>
+                </li>
+                <li className="flex items-start text-sm text-gray-600">
+                  <FiCheck className="w-4 h-4 text-[var(--primary)] mr-2 flex-shrink-0 mt-0.5" />
+                  <span>Suporte para turismo, estudos e trabalho</span>
+                </li>
+              </ul>
+              <a href="/servicos" className="mt-auto">
+                <Button variant="outline" className="w-full">
+                  Saiba Mais
+                </Button>
+              </a>
+            </Card>
+
+            {/* Imigração Canadense */}
+            <Card hover className="flex flex-col h-full">
+              <div className="flex items-center justify-center w-16 h-16 rounded-full bg-[var(--primary)]/10 text-[var(--primary)] mb-4">
+                <FiMapPin className="w-8 h-8" />
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-3">
+                Assessoria para Imigração Canadense
               </h3>
-              <p className="text-gray-600">
-                Ajuda com toda a burocracia necessária.
+              <p className="text-gray-600 mb-4 flex-grow">
+                Representação oficial através da Maritimes Immigration em Halifax, Nova Scotia.
               </p>
-            </div>
+              <ul className="space-y-2 mb-4">
+                <li className="flex items-start text-sm text-gray-600">
+                  <FiCheck className="w-4 h-4 text-[var(--primary)] mr-2 flex-shrink-0 mt-0.5" />
+                  <span>Express Entry, PNP e outros programas</span>
+                </li>
+                <li className="flex items-start text-sm text-gray-600">
+                  <FiCheck className="w-4 h-4 text-[var(--primary)] mr-2 flex-shrink-0 mt-0.5" />
+                  <span>Planejamento para residência permanente</span>
+                </li>
+              </ul>
+              <a href="/servicos" className="mt-auto">
+                <Button variant="outline" className="w-full">
+                  Saiba Mais
+                </Button>
+              </a>
+            </Card>
+
+            {/* Consultores de Intercâmbio */}
+            <Card hover className="flex flex-col h-full">
+              <div className="flex items-center justify-center w-16 h-16 rounded-full bg-[var(--primary)]/10 text-[var(--primary)] mb-4">
+                <FiUsers className="w-8 h-8" />
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-3">
+                Conexão com os Melhores Consultores de Intercâmbio
+              </h3>
+              <p className="text-gray-600 mb-4 flex-grow">
+                Seleção rigorosa de agências com selos de qualidade e segurança.
+              </p>
+              <ul className="space-y-2 mb-4">
+                <li className="flex items-start text-sm text-gray-600">
+                  <FiCheck className="w-4 h-4 text-[var(--primary)] mr-2 flex-shrink-0 mt-0.5" />
+                  <span>Agências com selos de qualidade</span>
+                </li>
+                <li className="flex items-start text-sm text-gray-600">
+                  <FiCheck className="w-4 h-4 text-[var(--primary)] mr-2 flex-shrink-0 mt-0.5" />
+                  <span>Indicação isenta e personalizada</span>
+                </li>
+              </ul>
+              <a href="/servicos" className="mt-auto">
+                <Button variant="outline" className="w-full">
+                  Saiba Mais
+                </Button>
+              </a>
+            </Card>
+
+            {/* Universidades e Colleges */}
+            <Card hover className="flex flex-col h-full">
+              <div className="flex items-center justify-center w-16 h-16 rounded-full bg-[var(--primary)]/10 text-[var(--primary)] mb-4">
+                <FiBookOpen className="w-8 h-8" />
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-3">
+                Conexão com Universidades e Colleges Internacionais
+              </h3>
+              <p className="text-gray-600 mb-4 flex-grow">
+                Aconselhamento acadêmico para graduação, pós e especializações em instituições de elite.
+              </p>
+              <ul className="space-y-2 mb-4">
+                <li className="flex items-start text-sm text-gray-600">
+                  <FiCheck className="w-4 h-4 text-[var(--primary)] mr-2 flex-shrink-0 mt-0.5" />
+                  <span>Instituições de elite e programas Pathway</span>
+                </li>
+                <li className="flex items-start text-sm text-gray-600">
+                  <FiCheck className="w-4 h-4 text-[var(--primary)] mr-2 flex-shrink-0 mt-0.5" />
+                  <span>Aconselhamento acadêmico personalizado</span>
+                </li>
+              </ul>
+              <a href="/servicos" className="mt-auto">
+                <Button variant="outline" className="w-full">
+                  Saiba Mais
+                </Button>
+              </a>
+            </Card>
+
+            {/* CNV */}
+            <Card hover className="flex flex-col h-full">
+              <div className="flex items-center justify-center w-16 h-16 rounded-full bg-[var(--primary)]/10 text-[var(--primary)] mb-4">
+                <FiHeart className="w-8 h-8" />
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-3">
+                Mentoria de CNV para Indivíduos e Empresas
+              </h3>
+              <p className="text-gray-600 mb-4 flex-grow">
+                Treinamentos para lideranças e equipes baseados na empatia e comunicação não-violenta.
+              </p>
+              <ul className="space-y-2 mb-4">
+                <li className="flex items-start text-sm text-gray-600">
+                  <FiCheck className="w-4 h-4 text-[var(--primary)] mr-2 flex-shrink-0 mt-0.5" />
+                  <span>Treinamentos para lideranças e equipes</span>
+                </li>
+                <li className="flex items-start text-sm text-gray-600">
+                  <FiCheck className="w-4 h-4 text-[var(--primary)] mr-2 flex-shrink-0 mt-0.5" />
+                  <span>Mediação de conflitos multiculturais</span>
+                </li>
+              </ul>
+              <a href="/servicos" className="mt-auto">
+                <Button variant="outline" className="w-full">
+                  Saiba Mais
+                </Button>
+              </a>
+            </Card>
           </div>
           <div className="text-center mt-8">
             <a href="/servicos">
@@ -154,27 +296,27 @@ export default async function Home() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
-              Por Que Escolher Nossos Serviços
+              Por Que Escolher Nossos Serviços?
             </h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
             <div className="text-center">
               <div className="text-4xl font-bold text-[var(--primary)] mb-2">
-                48.896+
+                + 25 mil
               </div>
-              <p className="text-gray-600">Experiências de ensino no exterior</p>
+              <p className="text-gray-600">Estudantes apoiados</p>
             </div>
             <div className="text-center">
               <div className="text-4xl font-bold text-[var(--primary)] mb-2">
-                100%
+                + 20 anos
               </div>
-              <p className="text-gray-600">Acompanhamento personalizado</p>
+              <p className="text-gray-600">De experiência em Educação Internacional</p>
             </div>
             <div className="text-center">
               <div className="text-4xl font-bold text-[var(--primary)] mb-2">
-                24/7
+                + 100 países
               </div>
-              <p className="text-gray-600">Suporte durante toda a jornada</p>
+              <p className="text-gray-600">Com networking ativo</p>
             </div>
           </div>
         </div>
