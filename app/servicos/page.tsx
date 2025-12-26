@@ -103,9 +103,9 @@ export default function ServicosPage() {
       <section className="py-16 lg:py-24 bg-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-7xl mx-auto">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-start">
               {servicos.map((servico, index) => (
-                <Card key={index} hover className="h-full flex flex-col">
+                <Card key={index} hover className="flex flex-col">
                   <div className="flex items-center justify-center w-16 h-16 rounded-full bg-[var(--primary)]/10 text-[var(--primary)] mb-6">
                     {servico.icon}
                   </div>
