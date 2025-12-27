@@ -66,7 +66,7 @@ export default function SobrePage() {
                 </div>
                 <div className="relative">
                   <Image
-                    src="/fotos_ivan/My Photo.jpeg"
+                    src="/fotos_ivan/IMG_5053.jpg"
                     alt="Ivan Tagliaferro - Especialista em Educação Internacional"
                     width={600}
                     height={600}
@@ -89,11 +89,15 @@ export default function SobrePage() {
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               <Card className="text-center">
-                <div className="flex justify-center mb-4">
-                  <div className="w-16 h-16 rounded-full bg-[var(--primary)]/10 flex items-center justify-center">
-                    <FiBook className="w-8 h-8 text-[var(--primary)]" />
+                <div className="flex flex-row items-center justify-center gap-3 mb-4">
+                    <Image
+                      src="/icon.png"
+                      alt="Icon - 20+ Anos de Experiência"
+                      width={60}
+                      height={60}
+                      className="object-contain"
+                     />
                   </div>
-                </div>
                 <h3 className="text-xl font-semibold text-gray-900 mb-3">
                   20+ Anos de Experiência
                 </h3>
@@ -104,9 +108,13 @@ export default function SobrePage() {
 
               <Card className="text-center">
                 <div className="flex flex-row items-center justify-center gap-3 mb-4">
-                  <div className="w-16 h-16 rounded-full bg-[var(--primary)]/10 flex items-center justify-center">
-                    <FiAward className="w-8 h-8 text-[var(--primary)]" />
-                  </div>
+                    <Image
+                      src="/award-logo.png"
+                      alt="35th ELETS World Education Summit Awards 2026"
+                      width={60}
+                      height={60}
+                      className="object-contain"
+                    />
                   <Image
                     src="/CPIEA-LOGO.png"
                     alt="CPIEA - Canadian Premier International Education Awards"
@@ -124,10 +132,17 @@ export default function SobrePage() {
               </Card>
 
               <Card className="text-center">
-                <div className="flex flex-col items-center mb-4">
+                <div className="flex flex-row items-center justify-center gap-3 mb-4">
                   <div className="w-16 h-16 rounded-full bg-[var(--primary)]/10 flex items-center justify-center mb-3">
                     <FiTarget className="w-8 h-8 text-[var(--primary)]" />
                   </div>
+                    <Image
+                      src="/CLLC-LOGO.png"
+                      alt="CLLC - Canadian Language Learning College"
+                      width={50}
+                      height={50}
+                      className="object-contain"
+                    />
                 </div>
                 <h3 className="text-xl font-semibold text-gray-900 mb-3">
                   Liderança Estratégica
@@ -142,6 +157,13 @@ export default function SobrePage() {
                   <div className="w-16 h-16 rounded-full bg-[var(--primary)]/10 flex items-center justify-center">
                     <FiUsers className="w-8 h-8 text-[var(--primary)]" />
                   </div>
+                  <Image
+                      src="/cnvc_logo_azul.png"
+                      alt="CNVC - Comunicação Não-Violenta"
+                      width={60}
+                      height={60}
+                      className="object-contain"
+                    />
                 </div>
                 <h3 className="text-xl font-semibold text-gray-900 mb-3">
                   Diferencial Humano
@@ -166,9 +188,6 @@ export default function SobrePage() {
               <div className="space-y-4 text-lg text-gray-700 leading-relaxed">
                 <p>
                   <strong>Humanizar as fronteiras e potencializar conexões globais através da ética e da empatia.</strong> Meu propósito é transformar a mobilidade internacional em um movimento consciente. Acredito que, quando conectamos as instituições certas aos parceiros ideais e preparamos as pessoas emocionalmente, criamos um mundo onde as fronteiras deixam de ser barreiras e passam a ser portais de crescimento humano e organizacional.
-                </p>
-                <p>
-                  Potencializar jornadas globais através de conexões éticas e conscientes. Acredito que o acesso à educação internacional deve ser guiado por quem entende o sistema por dentro. Meu propósito é servir como uma bússola para aqueles que buscam transformar suas vidas no exterior, bem como suas famílias, garantindo que cada passo seja dado sobre uma base de confiança, conhecimento real e inteligência emocional.
                 </p>
               </div>
             </div>
