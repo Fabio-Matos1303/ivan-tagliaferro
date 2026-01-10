@@ -10,6 +10,7 @@ export const siteConfig = {
   // Navegação
   navLinks: [
     { label: "Home", href: "/" },
+    { label: "Compromissos", href: "/compromissos" },
     { label: "Quem Sou", href: "/sobre" },
     { label: "Serviços", href: "/servicos" },
     { label: "Blog", href: "/blog" },

@@ -186,3 +186,76 @@ export async function getHeroSlides() {
   }
 }
 
+// Query para listar todos os compromissos públicos e futuros
+export const appointmentsQuery = groq`
+  *[_type == "appointment" && public == true && date >= now()] | order(date asc) {
+    _id,
+    title,
+    description,
+    date,
+    type,
+    location,
+    status,
+    image,
+    featured
+  }
+`;
+
+// Query para compromissos passados
+export const pastAppointmentsQuery = groq`
+  *[_type == "appointment" && public == true && date < now()] | order(date desc) [0...10] {
+    _id,
+    title,
+    description,
+    date,
+    type,
+    location,
+    status,
+    image,
+    featured
+  }
+`;
+
+// Query para compromissos destacados
+export const featuredAppointmentsQuery = groq`
+  *[_type == "appointment" && public == true && featured == true && date >= now()] | order(date asc) [0...3] {
+    _id,
+    title,
+    description,
+    date,
+    type,
+    location,
+    status,
+    image,
+    featured
+  }
+`;
+
+// Funções helper para buscar compromissos
+export async function getAppointments() {
+  try {
+    return await client.fetch(appointmentsQuery);
+  } catch (error) {
+    console.error("Erro ao buscar compromissos:", error);
+    return [];
+  }
+}
+
+export async function getPastAppointments() {
+  try {
+    return await client.fetch(pastAppointmentsQuery);
+  } catch (error) {
+    console.error("Erro ao buscar compromissos passados:", error);
+    return [];
+  }
+}
+
+export async function getFeaturedAppointments() {
+  try {
+    return await client.fetch(featuredAppointmentsQuery);
+  } catch (error) {
+    console.error("Erro ao buscar compromissos destacados:", error);
+    return [];
+  }
+}
+

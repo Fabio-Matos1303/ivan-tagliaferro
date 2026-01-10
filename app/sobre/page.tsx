@@ -133,9 +133,13 @@ export default function SobrePage() {
 
               <Card className="text-center">
                 <div className="flex flex-row items-center justify-center gap-3 mb-4">
-                  <div className="w-16 h-16 rounded-full bg-[var(--primary)]/10 flex items-center justify-center mb-3">
-                    <FiTarget className="w-8 h-8 text-[var(--primary)]" />
-                  </div>
+                    <Image
+                      src="/Logotipo-ABRAPEI (1).png" 
+                      alt="ABRAPEI - Associação Brasileira de Agências de Programas de Educação Internacional" 
+                      width={100} 
+                      height={100} 
+                      className="object-contain" 
+                    />
                     <Image
                       src="/CLLC-LOGO.png"
                       alt="CLLC - Canadian Language Learning College"
@@ -154,9 +158,6 @@ export default function SobrePage() {
 
               <Card className="text-center">
                 <div className="flex justify-center mb-4">
-                  <div className="w-16 h-16 rounded-full bg-[var(--primary)]/10 flex items-center justify-center">
-                    <FiUsers className="w-8 h-8 text-[var(--primary)]" />
-                  </div>
                   <Image
                       src="/cnvc_logo_azul.png"
                       alt="CNVC - Comunicação Não-Violenta"
