@@ -2,12 +2,12 @@ import { Button } from "@/app/components/ui/Button";
 import { Card } from "@/app/components/ui/Card";
 import { getWhatsAppLink } from "@/app/lib/constants";
 import { FiMessageCircle, FiCheck, FiBookOpen, FiUsers, FiShare2, FiFileText, FiMapPin, FiHeart } from "react-icons/fi";
-import { HeroCarousel, HeroSlide } from "@/app/components/sections/HeroCarousel";
+import { HeroVideoBackground, HeroSlide } from "@/app/components/sections/HeroVideoBackground";
 import { AlanaAssistant } from "@/app/components/sections/AlanaAssistant";
 import { getHeroSlides } from "@/app/lib/sanity/queries";
 import { urlFor } from "@/sanity/lib/image";
 
-// Revalidar a página a cada 60 segundos para buscar novos slides
+// Revalidar a página a cada 60 segundos para buscar novos dados
 export const revalidate = 60;
 
 export default async function Home() {
@@ -15,11 +15,12 @@ export default async function Home() {
   const whatsappUrl = getWhatsAppLink(whatsappMessage);
 
   // Buscar slides do Sanity CMS
+  // Os slides são buscados ordenados por 'order' (menor = primeiro) e apenas slides ativos
   let sanitySlides: any[] = [];
   try {
     sanitySlides = await getHeroSlides();
   } catch (error) {
-    console.error("Erro ao buscar slides do Sanity:", error);
+    console.error("Erro ao buscar slides do hero do Sanity:", error);
   }
 
   // Converter slides do Sanity para o formato do componente
@@ -28,8 +29,9 @@ export default async function Home() {
         id: slide._id,
         title: slide.title,
         description: slide.description,
-        image: slide.image ? urlFor(slide.image).width(1920).fit('max').url() : undefined,
+        image: slide.image ? urlFor(slide.image).width(1920).height(1080).fit('max').url() : undefined,
         imageAlt: slide.image?.alt || slide.title,
+        videoUrl: undefined, // Por enquanto sem vídeo, mas pode ser adicionado ao schema depois
         ctaPrimary: slide.ctaPrimary ? {
           text: slide.ctaPrimary.text,
           href: slide.ctaPrimary.href,
@@ -45,23 +47,27 @@ export default async function Home() {
         // Fallback: slides estáticos caso não haja slides no CMS
         {
           id: "1",
-          title: "Realize seu sonho de estudar no exterior",
-          description: "Consultoria especializada em intercâmbio e educação internacional. Acompanhamento personalizado em cada etapa da sua jornada.",
+          title: "Transforme seu sonho em realidade internacional",
+          description: "Mais de 20 anos facilitando intercâmbios, vistos e imigração. Acompanhamento personalizado em cada etapa da sua jornada global.",
+          image: "/fotos_ivan/IMG_5053.jpg",
+          imageAlt: "Ivan Tagliaferro - Especialista em Educação Internacional",
           ctaPrimary: {
             text: "Falar no WhatsApp",
             href: whatsappUrl,
             external: true,
           },
           ctaSecondary: {
-            text: "Baixar E-book Grátis",
-            href: "/ebooks",
+            text: "Conhecer Serviços",
+            href: "/servicos",
             external: false,
           },
         },
         {
           id: "2",
           title: "Experiência que transforma vidas",
-          description: "Mais de 48.896 experiências de ensino no exterior. Ajudamos você a encontrar o destino perfeito para seus objetivos acadêmicos e profissionais.",
+          description: "Mais de 25 mil estudantes apoiados. Ajudamos você a encontrar o destino perfeito para seus objetivos acadêmicos e profissionais.",
+          image: "/fotos_ivan/IMG_5053.jpg",
+          imageAlt: "Ivan Tagliaferro - Especialista em Educação Internacional",
           ctaPrimary: {
             text: "Conheça Nossos Serviços",
             href: "/servicos",
@@ -77,6 +83,8 @@ export default async function Home() {
           id: "3",
           title: "Acompanhamento 24/7 em toda sua jornada",
           description: "Suporte completo desde o planejamento até o retorno. Documentação, visto, acomodação e muito mais. Estamos com você em cada passo.",
+          image: "/fotos_ivan/IMG_5053.jpg",
+          imageAlt: "Ivan Tagliaferro - Especialista em Educação Internacional",
           ctaPrimary: {
             text: "Falar no WhatsApp",
             href: whatsappUrl,
@@ -91,14 +99,16 @@ export default async function Home() {
       ];
 
   return (
-    <div className="min-h-screen">
-      {/* Hero Section com Carrossel */}
-      <HeroCarousel
+    <>
+      {/* Hero Section com Vídeo de Fundo e Carrossel */}
+      <HeroVideoBackground
         slides={heroSlides}
+        overlayOpacity={0.6}
         autoPlay={true}
         autoPlayInterval={6000}
         showIndicators={true}
         showArrows={true}
+        showProgress={true}
       />
 
       {/* Serviços Preview */}
@@ -342,6 +352,6 @@ export default async function Home() {
           </a>
         </div>
       </section>
-    </div>
+    </>
   );
 }

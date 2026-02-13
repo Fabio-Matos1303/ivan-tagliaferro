@@ -176,6 +176,20 @@ export const heroSlidesQuery = groq`
   }
 `;
 
+// Query para o slide principal do hero (primeiro ativo)
+export const heroMainSlideQuery = groq`
+  *[_type == "heroSlide" && active == true] | order(order asc, _createdAt desc) [0] {
+    _id,
+    title,
+    description,
+    image,
+    ctaPrimary,
+    ctaSecondary,
+    order,
+    active
+  }
+`;
+
 // Função helper para buscar slides do hero
 export async function getHeroSlides() {
   try {
@@ -186,7 +200,17 @@ export async function getHeroSlides() {
   }
 }
 
-// Query para listar todos os compromissos públicos e futuros
+// Função helper para buscar o slide principal do hero
+export async function getHeroMainSlide() {
+  try {
+    return await client.fetch(heroMainSlideQuery);
+  } catch (error) {
+    console.error("Erro ao buscar slide principal do hero:", error);
+    return null;
+  }
+}
+
+// Query para listar todos os Eventos públicos e futuros
 export const appointmentsQuery = groq`
   *[_type == "appointment" && public == true && date >= now()] | order(date asc) {
     _id,
@@ -201,7 +225,7 @@ export const appointmentsQuery = groq`
   }
 `;
 
-// Query para compromissos passados
+// Query para Eventos passados
 export const pastAppointmentsQuery = groq`
   *[_type == "appointment" && public == true && date < now()] | order(date desc) [0...10] {
     _id,
@@ -216,7 +240,7 @@ export const pastAppointmentsQuery = groq`
   }
 `;
 
-// Query para compromissos destacados
+// Query para Eventos destacados
 export const featuredAppointmentsQuery = groq`
   *[_type == "appointment" && public == true && featured == true && date >= now()] | order(date asc) [0...3] {
     _id,
@@ -231,12 +255,12 @@ export const featuredAppointmentsQuery = groq`
   }
 `;
 
-// Funções helper para buscar compromissos
+// Funções helper para buscar Eventos
 export async function getAppointments() {
   try {
     return await client.fetch(appointmentsQuery);
   } catch (error) {
-    console.error("Erro ao buscar compromissos:", error);
+    console.error("Erro ao buscar Eventos:", error);
     return [];
   }
 }
@@ -245,7 +269,7 @@ export async function getPastAppointments() {
   try {
     return await client.fetch(pastAppointmentsQuery);
   } catch (error) {
-    console.error("Erro ao buscar compromissos passados:", error);
+    console.error("Erro ao buscar Eventos passados:", error);
     return [];
   }
 }
@@ -254,7 +278,7 @@ export async function getFeaturedAppointments() {
   try {
     return await client.fetch(featuredAppointmentsQuery);
   } catch (error) {
-    console.error("Erro ao buscar compromissos destacados:", error);
+    console.error("Erro ao buscar Eventos destacados:", error);
     return [];
   }
 }

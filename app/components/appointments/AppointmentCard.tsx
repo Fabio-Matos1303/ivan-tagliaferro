@@ -22,6 +22,8 @@ interface AppointmentCardProps {
     image?: any;
     featured?: boolean;
   };
+  /** Se informado, o card fica clicável e chama esta função ao clicar */
+  onClick?: () => void;
 }
 
 const typeLabels: Record<string, string> = {
@@ -50,7 +52,7 @@ const statusColors: Record<string, "default" | "primary" | "success" | "warning"
   cancelado: "warning",
 };
 
-export function AppointmentCard({ appointment }: AppointmentCardProps) {
+export function AppointmentCard({ appointment, onClick }: AppointmentCardProps) {
   const imageUrl = appointment.image
     ? urlFor(appointment.image).width(600).height(400).url()
     : null;
@@ -75,7 +77,7 @@ export function AppointmentCard({ appointment }: AppointmentCardProps) {
 
   const LocationIcon = locationIcon;
 
-  return (
+  const cardContent = (
     <Card hover className="flex flex-col h-full">
       {imageUrl && (
         <div className="relative w-full h-48 mb-4 rounded-lg overflow-hidden bg-gray-200">
@@ -156,5 +158,21 @@ export function AppointmentCard({ appointment }: AppointmentCardProps) {
       </div>
     </Card>
   );
+
+  if (onClick) {
+    return (
+      <div
+        role="button"
+        tabIndex={0}
+        onClick={onClick}
+        onKeyDown={(e) => (e.key === "Enter" || e.key === " ") && onClick()}
+        className="cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] focus-visible:ring-offset-2 rounded-xl"
+      >
+        {cardContent}
+      </div>
+    );
+  }
+
+  return cardContent;
 }
 
