@@ -16,12 +16,12 @@ export function AlanaAssistant({ variant = "default", className = "" }: AlanaAss
     return (
       <div className={`bg-gradient-to-br from-purple-50 to-blue-50 rounded-xl p-4 border border-purple-100 ${className}`}>
         <div className="flex items-center gap-3">
-          <div className="relative w-12 h-12 rounded-full overflow-hidden ring-2 ring-purple-200 flex-shrink-0">
+          <div className="relative w-12 h-14 rounded-xl overflow-hidden ring-2 ring-purple-200 flex-shrink-0 bg-purple-50/50">
             <Image
               src="/Gemini_Generated_Image_flasnrflasnrflas-removebg-preview.png"
               alt="Alana - Assistente IA"
               fill
-              className="object-cover object-[42%_50%]"
+              className="object-contain"
               sizes="48px"
             />
           </div>
@@ -57,12 +57,12 @@ export function AlanaAssistant({ variant = "default", className = "" }: AlanaAss
               <div className="flex flex-col sm:flex-row items-center gap-6">
                 {/* Imagem da Alana */}
                 <div className="relative flex-shrink-0">
-                  <div className="relative w-24 h-24 sm:w-32 sm:h-32 rounded-full overflow-hidden ring-4 ring-purple-200">
+                  <div className="relative w-24 h-32 sm:w-32 sm:h-40 rounded-xl overflow-hidden ring-4 ring-purple-200 bg-purple-50/50">
                     <Image
                       src="/WhatsApp_Image_2025-12-23_at_08.09.53-removebg-preview.png"
                       alt="Alana - Assistente IA de Educação Internacional"
                       fill
-                      className="object-cover object-[42%_50%]"
+                      className="object-contain"
                       sizes="(max-width: 640px) 96px, 128px"
                     />
                   </div>
