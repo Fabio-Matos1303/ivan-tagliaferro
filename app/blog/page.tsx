@@ -10,6 +10,9 @@ export const metadata = {
   description: "Artigos, dicas e informações sobre intercâmbio e educação internacional.",
 };
 
+// Revalidar a página a cada 60s para novos posts aparecerem sem depender só do webhook
+export const revalidate = 60;
+
 const categoryLabels: Record<string, string> = {
   dicas: "Dicas",
   documentação: "Documentação",

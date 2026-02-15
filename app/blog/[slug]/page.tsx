@@ -20,6 +20,8 @@ const categoryLabels: Record<string, string> = {
   geral: "Geral",
 };
 
+export const revalidate = 60;
+
 async function getPost(slug: string) {
   try {
     const post = await getPostBySlug(slug);

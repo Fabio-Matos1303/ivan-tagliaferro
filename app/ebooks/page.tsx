@@ -10,6 +10,8 @@ export const metadata = {
   description: "Baixe nossos e-books gratuitos e aprenda tudo sobre intercâmbio e educação internacional.",
 };
 
+export const revalidate = 60;
+
 export default async function EbooksPage() {
   const whatsappUrl = getWhatsAppLink();
   
