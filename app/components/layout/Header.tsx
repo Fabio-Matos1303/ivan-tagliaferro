@@ -38,13 +38,13 @@ export function Header() {
             className="hidden sm:flex items-center space-x-2 bg-[#25D366] text-white px-3 py-2 rounded-full hover:bg-[#20BA5A] transition-colors group relative"
             title="Falar com Alana no WhatsApp"
           >
-            <div className="relative w-8 h-8 rounded-full overflow-hidden ring-2 ring-white/30">
+            <div className="relative w-9 h-11 rounded-xl overflow-hidden ring-2 ring-white/30 flex-shrink-0 bg-white/10">
               <Image
-                src="/Gemini_Generated_Image_flasnrflasnrflas-removebg-preview.png"
+                src="/WhatsApp_Image_2025-12-23_at_08.09.53-removebg-preview.png"
                 alt="Alana - Assistente IA"
                 fill
-                className="object-cover"
-                sizes="32px"
+                className="object-contain"
+                sizes="36px"
               />
             </div>
             <div className="flex flex-col items-start">

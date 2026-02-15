@@ -21,7 +21,7 @@ export function AlanaAssistant({ variant = "default", className = "" }: AlanaAss
               src="/Gemini_Generated_Image_flasnrflasnrflas-removebg-preview.png"
               alt="Alana - Assistente IA"
               fill
-              className="object-cover"
+              className="object-cover object-[42%_50%]"
               sizes="48px"
             />
           </div>
@@ -62,8 +62,7 @@ export function AlanaAssistant({ variant = "default", className = "" }: AlanaAss
                       src="/WhatsApp_Image_2025-12-23_at_08.09.53-removebg-preview.png"
                       alt="Alana - Assistente IA de Educação Internacional"
                       fill
-                      className="object-cover"
-                      style={{ objectPosition: 'center 10%' }}
+                      className="object-cover object-[42%_50%]"
                       sizes="(max-width: 640px) 96px, 128px"
                     />
                   </div>
